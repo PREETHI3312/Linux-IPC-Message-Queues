@@ -25,9 +25,63 @@ Execute the C Program for the desired output.
 
 
 
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+// structure for message queue
+struct mesg_buffer {
+	long mesg_type;
+	char mesg_text[100];
+} message;
+int main()
+{
+	key_t key;
+	int msgid;
+// ftok to generate unique key
+	key = ftok("progfile", 65);
+	// msgget creates a message queue
+	// and returns identifier
+	msgid = msgget(key, 0666 | IPC_CREAT);
+	// msgrcv to receive message
+	msgrcv(msgid, &message, sizeof(message), 1, 0);
+	// display the message
+	printf("Data Received is : %s \n",
+			message.mesg_text);
+
+	// to destroy the message queue
+	msgctl(msgid, IPC_RMID, NULL);
+	return 0;
+}
+
+
+
 
 ## OUTPUT
+$ ./writer.o 
+Write Data : Helloworld
+Data send is : Helloworld 
 
+$ ./reader.o 
+Data Received is : Helloworld 
+
+$ ipcs
+------ Message Queues --------
+key        msqid      owner      perms      used-bytes   messages    
+0xffffffff 720896     gganesh    666        560          5           
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x00000000 262144     gganesh    600        33554432   2          dest         
+0x00000000 360449     gganesh    600        524288     2          dest         
+0x00000000 688130     gganesh    600        524288     2          dest         
+0x00000000 622595     gganesh    600        524288     2          dest         
+0x00000000 786436     gganesh    600        524288     2          dest         
+0x00000000 655365     gganesh    600        524288     2          dest         
+0x00000000 983046     gganesh    600        524288     2          dest         
+
+------ Semaphore Arrays --------
+key        semid      owner      perms      nsems    
 
 
 
