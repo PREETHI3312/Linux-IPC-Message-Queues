@@ -58,17 +58,28 @@ int main()
 
 
 ## OUTPUT
+
 $ ./writer.o 
+
 Write Data : Helloworld
+
 Data send is : Helloworld 
 
+
 $ ./reader.o 
+
 Data Received is : Helloworld 
 
+
 $ ipcs
+
 ------ Message Queues --------
+
 key        msqid      owner      perms      used-bytes   messages    
-0xffffffff 720896     gganesh    666        560          5           
+
+
+0xffffffff 720896     gganesh    666        560          5      
+
 
 ------ Shared Memory Segments --------
 key        shmid      owner      perms      bytes      nattch     status      
