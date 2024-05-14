@@ -1,7 +1,7 @@
 ## NAME:A K PREETHI
 ## REGISTER NO:212223230156
 
-# Linux-IPC-Message-Queues
+# EXP - 04 Linux-IPC-Message-Queues
 Linux IPC-Message Queues
 
 # AIM:
